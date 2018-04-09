@@ -22,12 +22,11 @@ void seek(size_t& deadline, int64_t warlocks_p, vector<size_t>& power, size_t& h
     if(warlocks_p <= harry_p)
       continue;
 
-    if(not l) // equal 0, which means no warlocks killed
+    if(not l)
       break;
 
-    if(begining) //equal 1, which means I have not taken the big stack of the begining
+    if(begining)
       track += ((1 << l) - (1 << begining--) + 1);
-    // the beginning's big stack have already been calculated so it ain't needed to do it again
 
     size_t it_aux {0};
     int64_t warlocks_p_aux{warlocks_p};
@@ -38,21 +37,13 @@ void seek(size_t& deadline, int64_t warlocks_p, vector<size_t>& power, size_t& h
       if(warlocks_p_aux > harry_p)
         continue;
 
-      track += 1;
+      ++track;
       if(it_aux) //greater than 0, because the 0th warlock is already calculated
         seek(it_aux, warlocks_p_aux, power, harry_p, track);
     }
   }
 
   if(begining)
-    /*
-    this one was speacially nicer than the rest,
-         I had a functional method but, for some unknown reason
-    the 10th test case was being rejected, that was because of a reallly big
-    2^n calculation. what had to be done was to prepare a little special
-    case to kill myself with so I could become to this little conclusion.
-    */
-
     if(l > 15)
     {
       size_t aux {15};
@@ -64,7 +55,6 @@ void seek(size_t& deadline, int64_t warlocks_p, vector<size_t>& power, size_t& h
       track += --aux_aux;
     }
     else track += ((1 << l) - (1 << begining) + 1);
-    // this one was the (^^^^)  bad boy
 }
 
 int main()
@@ -85,9 +75,9 @@ int main()
   clock_t prove = clock();
   #endif
 
-    int64_t track{0};
-    seek(warlocks_n, 0, warlocks, harry_power, track);
-    cout << track << endl;
+  int64_t track{0};
+  seek(warlocks_n, 0, warlocks, harry_power, track);
+  cout << track << endl;
 
 
   #ifdef TESTING_TIME
