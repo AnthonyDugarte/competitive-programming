@@ -38,7 +38,7 @@ void seek(size_t& deadline, int64_t warlocks_p, vector<size_t>& power, size_t& h
         continue;
 
       ++track;
-      if(it_aux) //greater than 0, because the 0th warlock is already calculated
+      if(it_aux)
         seek(it_aux, warlocks_p_aux, power, harry_p, track);
     }
   }
