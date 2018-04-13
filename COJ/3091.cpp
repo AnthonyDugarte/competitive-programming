@@ -6,11 +6,10 @@ using namespace std;
 
 void seek(size_t& deadline, int64_t warlocks_p, vector<size_t>& power, size_t& harry_p, int64_t& track)
 {
-  size_t it{0};
-
-  if((warlocks_p  += power[it++]) > harry_p)
+  if((warlocks_p  += power[0]) > harry_p)
     return;
 
+  size_t it{1};
   while((warlocks_p  += power[it++]) <= harry_p and it <= deadline);
 
   if(--it > 15)
@@ -50,4 +49,3 @@ int main()
 
   return 0;
 }
-
