@@ -11,14 +11,14 @@ int main()
   cin >> cases;
   vector<size_t> winners;
 
-  while (cases-- > 0)
+  while (--cases >= 0)
   {
     size_t candidates;
     size_t regions;
     cin >> candidates >> regions;
     vector<size_t> votes(candidates);
 
-    while(regions-- > 0)
+    while(--regions >= 0)
     {
       for(size_t candidate = 0; candidate < candidates; ++candidate)
       {
