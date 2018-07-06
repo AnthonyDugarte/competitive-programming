@@ -30,4 +30,7 @@
 *.exe
 *.out
 *.app
+
+
+# Compiled java class file
 *.class
