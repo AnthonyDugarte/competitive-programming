@@ -12,8 +12,7 @@ doublesNeeded = int(m - (n - n / k))
 
 score = 0
 if doublesNeeded > 0:
-    score = 1
-    score <<= (doublesNeeded + 1)
+    score = 1 << (doublesNeeded +1)
     score *= k
     score -= 2 * k
 
