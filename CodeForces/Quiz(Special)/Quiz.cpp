@@ -39,18 +39,16 @@ int main ()
   if(doublesNeeded > 0)
   {
     score = pow(2ull, doublesNeeded + 1);
-    score = (score * k);
-    score = (score - 2*k);
+    score *= k;
+    score -= 2 * k;
   }
 
   if(m > 0 and doublesNeeded >=0)
   {
-    score = score + m - doublesNeeded * k;
+    score = (score + m - doublesNeeded * k) % ::M;
     if(score < 0)
      score += ::M;
-    else score %= ::M;
   }
-
   else if(doublesNeeded < 0)
     score = m;
 
