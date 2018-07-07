@@ -12,14 +12,15 @@ doublesNeeded = int(m - (n - n / k))
 
 score = 0
 if doublesNeeded > 0:
-    score = 1 << (doublesNeeded +1)
+    score = (1 << (doublesNeeded +1)) % 1000000009
     score *= k
     score -= 2 * k
 
 if m > 0 and doublesNeeded >= 0:
-    score += m - doublesNeeded * k
+    score = (score + m - doublesNeeded * k) % 1000000009
+
 elif doublesNeeded < 0:
     score = m
 
-score %= 1000000009
+
 print(score)
