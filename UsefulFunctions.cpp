@@ -24,8 +24,8 @@ T modularMul(T a, T b, T m) // (a*b)%m = (a%m * b%m) %m
 }
 
 /* pow formula source: from a book sended by Juan Diego Morón
- * Note: modular part was added by me
- */
+  * Note: modular part was added by me
+  */
 template<typename T>
 T modularPow(T n, T e, T m)
 {
@@ -39,20 +39,14 @@ T modularPow(T n, T e, T m)
     e >>= 1;
     n = modularMul(n, n, m);
   }
-  
+
   return res;
 }
 
 
-/*
- * Cute fibonacci taken from a random website a night in which I was
- * searching, as a madman, how to handle really fucking big values on C++ with help
- * of modulo operator, which in C++ is the remainder operator, not the modulo operator
- * Take care of this. Source is going to be added as soon as I find it again
- *
- * put this at the beginning of your main function F[0] = F[1] = 1;
- *
- */
+/* Source: http://codeforces.com/blog/entry/14516
+  * put this at the beginning of your main function::  F[0] = F[1] = 1;
+  */
 # include <map>
 
 using type_t = unsigned long long;
