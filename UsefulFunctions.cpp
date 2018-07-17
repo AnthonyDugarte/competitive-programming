@@ -54,19 +54,25 @@ using type_t = unsigned long long;
 constexpr type_t M = 100000ull;
 std::map<type_t, type_t> F;
 
-type_t Fibonacci(type_t n) // modular fibonacci, call it like  Fibonacci(n - 1), Fibonacci(0) is not valid
+type_t Fib(type_t n) // modular fibonacci
 {
     if(F.count(n))
         return F[n];
 
     type_t k { n >> 1 };
 
-    if (n & 1) // n = 2 * k + 1
-        return F[n] = (modularMul(Fibonacci(k), Fibonacci(k + 1), ::M) + modularMul(Fibonacci(k - 1), Fibonacci(k), ::M)) % ::M;
-    // n = 2 * k
-    return F[n] = (modularMul(Fibonacci(k), Fibonacci(k), ::M) + modularMul(Fibonacci(k - 1), Fibonacci(k - 1), ::M)) % ::M;
+    // F(2 * k + 1) = F(k) * F(k + 1) + F(k - 1) * F(k)
+    if (n & 1)
+        return F[n] = (modularMul(Fib(k), Fib(k + 1), ::M) + modularMul(Fib(k - 1), Fib(k), ::M)) % ::M;
+
+    // F(2 * k) = F(k) ^ 2 + F(k - 1) ^ 2
+    return F[n] = (modularMul(Fib(k), Fib(k), ::M) + modularMul(Fib(k - 1), Fib(k - 1), ::M)) % ::M;
 }
 
+inline type_t Fibonacci(type_t n)
+{
+    return n == 0 ? 0 : Fib(n - 1);
+}
 
 
 inline type_t naturalSummatory(type_t n) // 1 + 2 + 3 + 4 + ... + n
@@ -78,7 +84,6 @@ inline type_t quadraticSummatory(type_t n) // 1^2 + 2^2 + 3^2 + 4 ^2+ ... + n^2
 {
     return n * (n + 1) * ( 2 * n + 1) / 6;
 }
-
 
 int main()
 {
