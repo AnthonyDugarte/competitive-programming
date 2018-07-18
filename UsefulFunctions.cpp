@@ -1,46 +1,136 @@
 // some useful functions I've found interesting while solving some CP problems
 
 // main idea from: https://stackoverflow.com/questions/11630321/why-does-c-output-negative-numbers-when-using-modulo
-template<typename T>
-T module(T n, T m) // c++' % operand is not module but remainder
-{
-    T res { n % m };
-
-    return res < T(0) ? res + m : res; // if remainder is negative, we just sum m to get module
-}
+template<typename T> // c++' % operand is not mod but remainder
+T mod(T n, T m) { return (n % m + m) % m; }
 
 // formula source: https://www.hackerearth.com/practice/notes/get-the-modulo-of-a-very-large-number-that-cannot-be-stored-in-any-data-type-in-cc-1/
+template<typename T> // (a+b)%m = (a%m + b%m) %m
+T modSum(T a, T b, T m) { return mod(mod(a, m) + mod(b, m), m); }
+
 template<typename T>
-T modularSum(T a, T b, T m) // (a+b)%m = (a%m + b%m) %m
-{
-    return module(  module(a, m)   +  module(b, m),    m);
-}
+T modSub(T a, T b, T m) { return mod(mod(a, m) - mod(b, m), m); }
 
 // formula source: https://www.hackerearth.com/practice/notes/get-the-modulo-of-a-very-large-number-that-cannot-be-stored-in-any-data-type-in-cc-1/
+template<typename T> // (a*b)%m = (a%m * b%m) %m
+T modMul(T a, T b, T m) { return mod(mod(a, m) * mod(b, m), m); }
+
+// source from modDivide: https://www.geeksforgeeks.org/modular-division/
+# include <stdexcept>
+
 template<typename T>
-T modularMul(T a, T b, T m) // (a*b)%m = (a%m * b%m) %m
+T modInverse(T b, T m);
+
+template<typename T>
+T modDivide(T a, T b, T m)
 {
-    return module(  module(a, m)  *  module(b, m),    m);
+    a = mod(a, m);
+    T inv = modInverse(b, m);
+    if (inv == T(-1))
+       throw std::domain_error("Division not defined");
+
+    return modMul(inv, a, m);
 }
 
-/* pow formula source: from a book sended by Juan Diego Morón
-  * Note: modular part was added by me
-  */
+// Source:  https://www.geeksforgeeks.org/euclidean-algorithms-basic-and-extended/
 template<typename T>
-T modularPow(T n, T e, T m)
+T gcdExtended(T a, T b, T *x, T *y)
+{
+    // Base Case
+    if (a == T(0))
+    {
+        *x = T(0);
+        *y = T(1);
+        return b;
+    }
+
+    T x1, y1; // To store results of recursive call
+    T gcd = gcdExtended(b % a, a, &x1, &y1);
+
+    // Update x and y using results of recursive
+    // call
+    *x = y1 - (b / a) * x1;
+    *y = x1;
+
+    return gcd;
+}
+
+template<typename T>
+T modInverse(T b, T m)
+{
+    T x, y; // used in extended GCD algorithm
+    T g = gcdExtended(b, m, &x, &y);
+
+    // Return -1 if b and m are not co-prime,check source for details
+    if (g != 1)
+        return T(-1);
+
+    return mod(x, m);
+}
+
+// pow formula source: from a book sended by Juan Diego Morón
+template<typename T>
+T pow(T n, T e)
+{
+    T res { 1 };
+
+    while(e > T(0))
+    {
+      if (e & 1)
+        res = res * n;
+
+      e >>= 1;
+      n = n * n;
+    }
+
+    return res;
+}
+
+template<typename T>
+T pow(T n, T e, T m)
 {
   T res { 1 };
 
   while(e > T(0))
   {
     if (e & 1)
-      res = modularMul(res, n, m);
+      res = modMul(res, n, m);
 
     e >>= 1;
-    n = modularMul(n, n, m);
+    n = modMul(n, n, m);
   }
 
   return res;
+}
+
+template<typename T> // 1 + 2 + 3 + 4 + ... + n
+T naturalSummatory(T n) { return n * (n + 1) / 2; }
+template<typename T>
+T naturalSummatory(T n, T m) { return modDivide(modMul(n, modSum(n, T(1), m), m), T(2), m); }
+
+template<typename T> // 1^2 + 2^2 + 3^2 + 4 ^2+ ... + n^2
+T quadraticSummatory(T n) { return n * (n + 1) * ( 2 * n + 1) / 6; }
+template<typename T>
+T quadraticSummatory(T n, T m)
+{
+    return modDivide(modMul(n, modMul(modSum(n, T(1), m),modSum(modMul(T(2), n, m), T(1) , m), m) , m), T(6), m);
+}
+
+template <typename T>  // 1 + x^1 + x^2 + x^3  + ... + x^n --> (x ^ (n + 1) - 1) / (x - 1)
+T finiteGeometricSerie(T x, T n)
+{
+    if(x == T(1))
+        return n + T(1);
+
+    return (pow(x, n + T(1)) - T(1)) / (x - T(1));
+}
+template<typename T>
+T finiteGeometricSerie(T x, T n, T m)
+{
+    if(x == T(1))
+        return mod(n + 1, m);
+
+    return modDivide(modSub(pow(x, modSum(n, T(1), m), m), T(1), m), modSub(x, T(1), m), m);
 }
 
 
@@ -49,7 +139,7 @@ T modularPow(T n, T e, T m)
   */
 # include <map>
 
-using type_t = unsigned long long;
+using type_t = long long;
 
 constexpr type_t M = 100000ull;
 std::map<type_t, type_t> F;
@@ -63,10 +153,10 @@ type_t Fib(type_t n) // modular fibonacci
 
     // F(2 * k + 1) = F(k) * F(k + 1) + F(k - 1) * F(k)
     if (n & 1)
-        return F[n] = (modularMul(Fib(k), Fib(k + 1), ::M) + modularMul(Fib(k - 1), Fib(k), ::M)) % ::M;
+        return F[n] = (modMul(Fib(k), Fib(k + 1), ::M) + modMul(Fib(k - 1), Fib(k), ::M)) % ::M;
 
     // F(2 * k) = F(k) ^ 2 + F(k - 1) ^ 2
-    return F[n] = (modularMul(Fib(k), Fib(k), ::M) + modularMul(Fib(k - 1), Fib(k - 1), ::M)) % ::M;
+    return F[n] = (modMul(Fib(k), Fib(k), ::M) + modMul(Fib(k - 1), Fib(k - 1), ::M)) % ::M;
 }
 
 inline type_t Fibonacci(type_t n)
@@ -74,20 +164,17 @@ inline type_t Fibonacci(type_t n)
     return n == 0 ? 0 : Fib(n - 1);
 }
 
-
-inline type_t naturalSummatory(type_t n) // 1 + 2 + 3 + 4 + ... + n
-{
-    return n * (n + 1) >> 1;
-}
-
-inline type_t quadraticSummatory(type_t n) // 1^2 + 2^2 + 3^2 + 4 ^2+ ... + n^2
-{
-    return n * (n + 1) * ( 2 * n + 1) / 6;
-}
+# include <iostream>
 
 int main()
 {
-    F[0] = F[1] = 1; // for Fibonacci
+    using namespace std;
+
+    F[0] = F[1] = 1; // Fibonacci's stuff
+
+    // for a litle bit faster standar c++ input, avoid if interactive I/O
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
 
     return 0;
 }
