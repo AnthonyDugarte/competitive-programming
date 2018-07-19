@@ -1,5 +1,4 @@
 /* CodeForces Problem: http://codeforces.com/problemset/problem/1/A
- * Made by: Anthony Dugarte through PapasFritas (codeforces.com/profile/PapasFritas)
  */
 
 # include <cstdio>

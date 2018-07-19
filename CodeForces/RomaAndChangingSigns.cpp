@@ -1,6 +1,5 @@
 /* CodeForces Problem: https://codeforces.com/problemset/problem/262/B
  * Made by: Anthony Dugarte and Carlos Bone on "Maratón de práctica ULA 2018"
- * through PapasFritas (codeforces.com/profile/PapasFritas)
  */
 
 # include <iostream>

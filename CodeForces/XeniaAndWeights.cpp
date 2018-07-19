@@ -1,6 +1,4 @@
 /* CodeForces Problem: https://codeforces.com/problemset/problem/339/C
- * Made by: Anthony Dugarte through PapasFritas (codeforces.com/profile/PapasFritas)
- *
  * Note: It was a problem of "Maratón de práctica ULA 2018" competition.
  */
 

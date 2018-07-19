@@ -1,5 +1,4 @@
 /* CodeForces Problem: http://codeforces.com/problemset/problem/337/C
- * Made by: Anthony Dugarte through PapasFritas (codeforces.com/profile/PapasFritas)
  * Note 1: It was a problem of "Maraton de practica ULA 2018" competition.
  *
  * Note 2: This one wasn't the one that was uploaded to the plataform, NOT ANYMORE
