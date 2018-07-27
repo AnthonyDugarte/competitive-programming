@@ -1,3 +1,5 @@
+// https://codeforces.com/problemset/problem/266/A
+
 # include <iostream>
 
 int main()

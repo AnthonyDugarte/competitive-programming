@@ -1,6 +1,8 @@
+// https://codeforces.com/problemset/problem/1011/A
+
 # include <iostream>
 # include <vector>
-# include <set>
+# include <unordered_set>
 # include <algorithm>
 
 std::vector<char> stages;
@@ -39,7 +41,7 @@ int main()
 
     std::cin >> n >> k;
 
-    std::set<char> t_stages;
+    std::unordered_set<char> t_stages;
     for(size_t i{}; i < n; ++i)
     {
         char c;
@@ -49,6 +51,7 @@ int main()
     }
 
     stages.assign(t_stages.begin(), t_stages.end());
+    std::sort(stages.begin(), stages.end());
     n = stages.size();
 
     getBest(1, 1, weight(stages[0]), stages.at(0));
