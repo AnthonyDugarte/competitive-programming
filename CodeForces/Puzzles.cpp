@@ -1,6 +1,4 @@
-/* CodeForces Problem: https://codeforces.com/problemset/problem/337/A
- * Made by: Carlos Bone and Anthony Dugarte on "Maratón de práctica ULA 2018"
- */
+// https://codeforces.com/problemset/problem/337/A
 
 # include <iostream>
 # include <vector>

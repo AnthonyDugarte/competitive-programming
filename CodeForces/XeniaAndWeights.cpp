@@ -1,6 +1,4 @@
-/* CodeForces Problem: https://codeforces.com/problemset/problem/339/C
- * Note: It was a problem of "Maratón de práctica ULA 2018" competition.
- */
+// https://codeforces.com/problemset/problem/339/C
 
 # include <iostream>
 # include <string>

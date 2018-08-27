@@ -1,6 +1,5 @@
-/* CodeForces Problem: http://codeforces.com/problemset/problem/165/C
- * Note: It was a problem of "Maratón de práctica ULA 2018" competition.
- */
+// http://codeforces.com/problemset/problem/165/C
+
 # include <iostream>
 # include <vector>
 

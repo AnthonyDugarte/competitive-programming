@@ -1,15 +1,10 @@
-/* CodeForces Problem: http://codeforces.com/problemset/problem/337/C
- * Note 1: It was a problem of "Maraton de practica ULA 2018" competition.
- *
- * Note 2: This one wasn't the one that was uploaded to the plataform, NOT ANYMORE
- * learned a little bit more about handling really big numbers and were it is, the solution with
- * speed
- */
+// http://codeforces.com/problemset/problem/337/C
+
 # include <iostream>
 
 using type_t = long long;
 
-type_t M = 1000000009ll;
+const type_t M = 1000000009ll;
 
 type_t pow(type_t x, type_t n)
 {
@@ -26,7 +21,7 @@ type_t pow(type_t x, type_t n)
   return res;
 }
 
-int main ()
+int main()
 {
   type_t n, m, k;
   std::cin >> n >> m >> k;
@@ -51,6 +46,6 @@ int main ()
   else if(doublesNeeded < 0)
     score = m;
 
-  std::cout << score << std::endl;
+  std::cout << score << "\n";
   return 0;
 }

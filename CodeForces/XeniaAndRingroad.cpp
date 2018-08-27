@@ -1,9 +1,4 @@
-/* CodeForces Problem: http://codeforces.com/problemset/problem/339/B
- *
- * Note: It was solved on "Maratón de práctica ULA 2018" but correct solution
- * was never submited, we placed third with 5 problems solved (not counting this one),
- * first place had 6 problems solved.
- */
+// http://codeforces.com/problemset/problem/339/B
 
 # include <iostream>
 # include <vector>

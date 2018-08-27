@@ -1,6 +1,4 @@
-/* CodeForces Problem: http://codeforces.com/problemset/problem/319/C
-  * Note: It was a problem of "Maratón de práctica ULA 2018" competition.
-  */
+// http://codeforces.com/problemset/problem/319/C
 
 #include <iostream>
 #include <vector>
