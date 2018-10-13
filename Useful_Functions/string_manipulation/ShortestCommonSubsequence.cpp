@@ -1,10 +1,9 @@
-// source: David Cédres
-
 #include <iostream>
 #include <string>
 #include <map>
 #include <utility>
 
+// source: David Cédres
 std::string SCS(std::string a_str, std::string b_str, std::map<std::pair<const std::string, const std::string>, std::string> &mem)
 {
     auto search { mem.find({ a_str, b_str }) };
