@@ -34,3 +34,6 @@
 
 # Compiled java class file
 *.class
+
+# VCode locala config files
+.vscode
