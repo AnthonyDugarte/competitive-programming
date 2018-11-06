@@ -3,6 +3,8 @@ using namespace std;
 
 using graph_t = unordered_map<int, unordered_map<int, int>>; // [node][arc] -> reps
 
+unordered_map<int, unordered_map<int, int>> paths; // from key I can acces children nodes
+
 // bool to update parent - current
 bool DFS(graph_t &graph, unordered_set<int> &visited_nodes, int parent, int current, int target)
 {
@@ -18,9 +20,18 @@ bool DFS(graph_t &graph, unordered_set<int> &visited_nodes, int parent, int curr
         return true;
     }
 
+    unordered_map<int, int>::iterator path_search { paths[current].find(target) };
+    if(path_search != paths[current].end())
+    {
+        ++graph[parent][current];
+        ++graph[current][parent];
+        return DFS(graph, visited_nodes, current, (*path_search).second, target);
+    }
+
     for(auto child : graph[current])
         if(DFS(graph, visited_nodes, current, child.first, target))
         {
+            paths[current][target] = child.first;
             ++graph[parent][current];
             ++graph[current][parent];
             return true;
@@ -30,6 +41,7 @@ bool DFS(graph_t &graph, unordered_set<int> &visited_nodes, int parent, int curr
     return false;
 }
 
+/*
 void BFS(graph_t &graph, int source, int target)
 {
            //visited - parent
@@ -41,7 +53,8 @@ void BFS(graph_t &graph, int source, int target)
 
     bool target_found{ false };
 
-    while(/*not curr_nodes.empty() and */not target_found)
+    while(//not curr_nodes.empty() and
+        not target_found)
     {
         int curr_node{ curr_nodes.front() };
         curr_nodes.pop();
@@ -71,10 +84,10 @@ void BFS(graph_t &graph, int source, int target)
 
         target = visited_nodes[target];
     }
-}
+}*/
 
 
-// source: a b, target: a, b
+/*// source: a b, target: a, b
 double EuclideanDistance(int x1, int y1, int x2, int y2) // heuristic
 {
     return static_cast<double>(sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
@@ -153,6 +166,7 @@ void A_start(graph_t &graph, int source, int target)
         }
     }
 }
+*/
 
 int main()
 {
@@ -185,18 +199,16 @@ int main()
             cout << graph[a][b] << "\n";
         else
         {
-            A_start(graph, a, b);
-
             // BFS(graph, a, b);
+            
+            // A_start(graph, a, b);
 
-            /*
             unordered_set<int> visited_nodes;
             visited_nodes.insert(a);
         
             for(auto child : graph[a])
                 if(DFS(graph, visited_nodes, a, child.first, b))
                     break;
-            */
         }
     }
 
