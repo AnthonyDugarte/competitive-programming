@@ -8,13 +8,13 @@ T quadraticSummatory(T n) { return n * (n + 1) * ( 2 * n + 1) / 6; }
 template<typename T>
 T pow(T n, T e);
 
-template <typename T>  // x^0 + x^1 + x^2 + x^3  + ... + x^n --> (x ^ (n + 1) - 1) / (x - 1)
+template <typename T>  // x^0 + x^1 + x^2 + x^3  + ... + x^n --> (1 - x ^ (n + 1)) / (1 - x)
 T finiteGeometricSerie(T x, T n)
 {
     if(x == 1)
         return n + 1;
 
-    return (pow(x, n + 1) - 1) / (x - 1);
+    return (1 - pow(x, n + 1)) / (1 - x);
 }
 
 template<typename T>

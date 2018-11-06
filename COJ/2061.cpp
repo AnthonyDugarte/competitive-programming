@@ -1,19 +1,46 @@
 template<typename T> // c++' % operand is not mod but remainder
 T mod(T n, T m) { return (n % m + m) % m; }
-
 template<typename T> // (a + b) % m = (a % m + b% m) % m
 T modSum(T a, T b, T m) { return mod(mod(a, m) + mod(b, m), m); }
-
 template<typename T> // (a - b) % m = (a % m - b % m) % m
 T modSub(T a, T b, T m) { return mod(mod(a, m) - mod(b, m), m); }
-
 template<typename T> // (a * b) % m = (a % m * b % m) % m
 T modMul(T a, T b, T m) { return mod(mod(a, m) * mod(b, m), m); }
-
-template<typename T> // (a / b) % m
+template<typename T>
 T modDivide(T a, T b, T m);
+template<typename T>
+T pow(T n, T e, T m);
 
-// source from modDivide: https://www.geeksforgeeks.org/modular-division/
+template <typename T>  // x^0 + x^1 + x^2 + x^3  + ... + x^n --> (x ^ (n + 1) - 1) / (x - 1)
+T finiteGeometricSerie(T x, T n, T m)
+{
+    if(x == T(1))
+        return mod(n + 1, m);
+    
+    return modDivide(modSub( T{ 1 }, pow(x, n + 1, m), m), modSub(T{ 1 }, x, m), m);
+    
+    // return modDivide(modSub(pow(x, modSum(n, T(1), m), m), T(1), m), modSub(x, T(1), m), m);
+}
+
+#include <iostream>
+
+int main()
+{
+    std::ios_base::sync_with_stdio(false);
+    
+    size_t t;
+    std::cin >> t;
+    
+    while(--t != -1)
+    {
+        long long x, n;
+        std::cin >> x >> n;
+        std::cout << finiteGeometricSerie(x, n, 1000000007ll) << "\n";
+    }
+
+    return 0;
+}
+
 # include <stdexcept>
 
 template<typename T>
@@ -66,15 +93,12 @@ T modInverse(T b, T m)
     return mod(x, m);
 }
 
-
-/* functions with ugly modular form, not needed at all */
-
 template<typename T>
 T pow(T n, T e, T m)
 {
   T res { 1 };
 
-  while(e > T(0))
+  while(e > T{ 0 })
   {
     if (e & 1)
       res = modMul(res, n, m);
@@ -84,26 +108,4 @@ T pow(T n, T e, T m)
   }
 
   return res;
-}
-
-
-template<typename T> // 1 + 2 + 3 + 4 + ... + n
-T naturalSummatory(T n, T m) { return modDivide(modMul(n, modSum(n, T(1), m), m), T(2), m); }
-
-template<typename T> // 1^2 + 2^2 + 3^2 + 4 ^2+ ... + n^2
-T quadraticSummatory(T n, T m)
-{
-    return modDivide(modMul(n, modMul(modSum(n, T(1), m),modSum(modMul(T(2), n, m), T(1) , m), m) , m), T(6), m);
-}
-
-template<typename T> // x^0 + x^1 + x^2 + x^3  + ... + x^n --> (1 - x ^ (n + 1)) / (1 - x)
-T finiteGeometricSerie(T x, T n, T m) 
-{
-    if(x == T(1))
-        return mod(n + 1, m);
-
-    return modDivide(modSub( T{ 1 }, pow(x, n + 1, m), m), modSub(T{ 1 }, x, m), m);
-    
-    // inverted
-    //return modDivide(modSub(pow(x, modSum(n, T(1), m), m), T(1), m), modSub(x, T(1), m), m);
 }
