@@ -1,10 +1,10 @@
+// Educational Codeforces Round 56 (Rated for Div. 2)
 #include <bits/stdc++.h>
 
 using namespace std;
 using type_t = long long;
 using vt = vector<type_t>;
 
-// Educational Codeforces Round 56 (Rated for Div. 2)
 
 size_t n;
 size_t  n_f;
