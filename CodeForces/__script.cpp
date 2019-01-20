@@ -1,7 +1,7 @@
 /*
  *
- * Copyright: Anthony Dugarte
  * 
+ *
  */
 
 #include <bits/stdc++.h>
