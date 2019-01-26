@@ -13,6 +13,7 @@ void fastIO() {
 template<typename T, typename U> using p_t = std::pair<T, U>;
 
 template<typename T> using s_t = std::set<T>;
+template<typename T> using us_t = std::unordered_set<T>;
 template<typename T> using v_t = std::vector<T>;
 
 template<typename T, typename U> using m_t = std::map<T, U>;
