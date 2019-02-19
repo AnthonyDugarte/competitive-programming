@@ -3,15 +3,11 @@
 using std::cin;
 using std::cout;
 
-void fastIO(bool tie = true)
+void fastIO()
 {
     std::ios_base::sync_with_stdio(false);
-
-    if (!tie)
-    {
-        cin.tie(nullptr);
-        cout.tie(nullptr);
-    }
+    cin.tie(nullptr);
+    cout.tie(nullptr);
 }
 
 template <typename T, typename U>
@@ -45,6 +41,35 @@ constexpr type_t module{static_cast<type_t>(1e9 + 7)};
 int main()
 {
     fastIO();
+
+    type_t n, odd{0}, even{0}, good{0};
+    cin >> n;
+    v_t<type_t> v(n);
+
+    for (size_t i{0}; i < n; ++i)
+    {
+        cin >> v[i];
+        if (i == 0)
+            continue;
+
+        (i & 1 ? even : odd) += v[i];
+    }
+
+    if (even == odd)
+        ++good;
+
+    for (size_t i{1}; i < n; ++i)
+    {
+        type_t &target{i & 1 ? even : odd};
+
+        target -= v[i];
+        target += v[i - 1];
+
+        if (even == odd)
+            ++good;
+    }
+
+    cout << good << endl;
 
     return 0;
 }

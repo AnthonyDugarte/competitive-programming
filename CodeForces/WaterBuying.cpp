@@ -3,15 +3,11 @@
 using std::cin;
 using std::cout;
 
-void fastIO(bool tie = true)
+void fastIO()
 {
     std::ios_base::sync_with_stdio(false);
-
-    if (!tie)
-    {
-        cin.tie(nullptr);
-        cout.tie(nullptr);
-    }
+    cin.tie(nullptr);
+    cout.tie(nullptr);
 }
 
 template <typename T, typename U>
@@ -44,7 +40,23 @@ constexpr type_t module{static_cast<type_t>(1e9 + 7)};
 
 int main()
 {
-    fastIO();
+    // fastIO();
+
+    type_t n, a, b, t;
+    cin >> t;
+
+    while (--t != -1)
+    {
+        cin >> n >> a >> b;
+
+        b *= n >> 1;
+        if (n & 1)
+            b += a;
+
+        a *= n;
+
+        cout << std::min(a, b) << endl;
+    }
 
     return 0;
 }
