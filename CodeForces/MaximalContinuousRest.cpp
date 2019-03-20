@@ -1,3 +1,5 @@
+// Codeforces Round #547 (Div. 3)
+
 #include <bits/stdc++.h>
 
 template <typename T, typename U>
@@ -35,10 +37,11 @@ using std::cout;
 constexpr char endl = '\n';
 constexpr type_t M{static_cast<type_t>(1e9 + 7)};
 
+void fastIO_n_untie(bool = false);
 template <typename T>
-void debug(T val) { cout << val << endl; }
+void outThis(T val) { cout << val << endl; }
 template <typename T, typename... TT>
-void debug(T val, TT... tail) { cout << val << " : ", debug(tail...); }
+void outThis(T val, TT... tail) { cout << val << " : ", outThis(tail...); }
 
 template <typename T>
 T min_val() { return std::numeric_limits<T>::min(); }
@@ -49,9 +52,43 @@ type_t gcd(type_t a, type_t b) { return a == 0 ? b : gcd(b % a, a); }
 
 int main()
 {
-    std::ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
+    fastIO_n_untie(false);
+
+    size_t n, rest, first{0}, count{0}, max{0};
+    cin >> n;
+
+    while (--n != -1)
+    {
+        cin >> rest;
+        first += rest;
+
+        if (!rest)
+            break;
+    }
+
+    while (--n != -1)
+    {
+        cin >> rest;
+        count += rest;
+
+        if (!rest)
+        {
+            max = std::max(max, count);
+            count = 0;
+        }
+    }
+
+    outThis(std::max(max, count + first));
 
     return 0;
+}
+
+void fastIO_n_untie(bool untie)
+{
+    std::ios_base::sync_with_stdio(false);
+    if (untie)
+    {
+        cin.tie(nullptr);
+        cout.tie(nullptr);
+    }
 }
