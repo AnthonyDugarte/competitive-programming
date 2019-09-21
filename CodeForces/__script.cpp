@@ -45,7 +45,7 @@ T min_val() { return std::numeric_limits<T>::min(); }
 template <typename T>
 T max_val() { return std::numeric_limits<T>::max(); }
 
-type_t gcd(type_t a, type_t b) { return a == 0 ? b : gcd(b % a, a); }
+type_t gcd(type_t a, type_t b) { return b == 0 ? a : gcd(b, a % b); }
 
 int main()
 {
