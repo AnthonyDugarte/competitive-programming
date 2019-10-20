@@ -13,7 +13,7 @@ using v_t = std::vector<T>;
 template <typename T>
 using vv_t = v_t<v_t<T>>;
 template <typename T>
-using vvv_t = vv_t<T>;
+using vvv_t = v_t<vv_t<T>>;
 
 template <typename T, typename U>
 using m_t = std::map<T, U>;
@@ -50,11 +50,35 @@ T max_val() { return std::numeric_limits<T>::max(); }
 
 type_t gcd(type_t a, type_t b) { return b == 0 ? a : gcd(b, a % b); }
 
+type_t dp(vvv_t<type_t> &memo, type_t &n, type_t i = 0, bool b = true, bool c = true)
+{
+    if (i == n - 1)
+        return 1;
+
+    type_t &aux{memo[i][b][c]};
+
+    if (aux)
+        return aux;
+
+    if (c)
+        return aux = (dp(memo, n, i + 1, !b, c) +
+                      dp(memo, n, i + 1, b, !c)) %
+                     M;
+    return aux = (dp(memo, n, i + 1, !b, !c)) % M;
+}
+
 int main()
 {
     std::ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    type_t n, m;
+    cin >> n >> m;
+
+    vvv_t<type_t> nn(n, vv_t<type_t>(2, v_t<type_t>(2, 0))), mm(m, vv_t<type_t>(2, v_t<type_t>(2, 0)));
+
+    cout << ((dp(nn, n) << 1) + (dp(mm, m) << 1) - 2) % M << endl;
 
     return 0;
 }

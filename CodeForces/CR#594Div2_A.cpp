@@ -1,3 +1,5 @@
+
+
 #include <bits/stdc++.h>
 
 template <typename T, typename U>
@@ -7,13 +9,10 @@ template <typename T>
 using s_t = std::set<T>;
 template <typename T>
 using us_t = std::unordered_set<T>;
-
 template <typename T>
 using v_t = std::vector<T>;
 template <typename T>
-using vv_t = v_t<v_t<T>>;
-template <typename T>
-using vvv_t = vv_t<T>;
+using vv_t = std::vector<std::vector<T>>;
 
 template <typename T, typename U>
 using m_t = std::map<T, U>;
@@ -55,6 +54,30 @@ int main()
     std::ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    type_t t;
+
+    cin >> t;
+    while (t--)
+    {
+        type_t n, m, aux, x{0}, x2{0}, q{0}, q2{0};
+
+        cin >> n;
+        for (size_t i{0}; i < n; ++i)
+        {
+            cin >> aux;
+            (aux & 1 ? x : q)++;
+        }
+
+        cin >> m;
+        for (size_t i{0}; i < m; ++i)
+        {
+            cin >> aux;
+            (aux & 1 ? x2 : q2)++;
+        }
+
+        cout << (x * x2) + (q * q2) << endl;
+    }
 
     return 0;
 }

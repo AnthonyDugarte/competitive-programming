@@ -7,13 +7,10 @@ template <typename T>
 using s_t = std::set<T>;
 template <typename T>
 using us_t = std::unordered_set<T>;
-
 template <typename T>
 using v_t = std::vector<T>;
 template <typename T>
-using vv_t = v_t<v_t<T>>;
-template <typename T>
-using vvv_t = vv_t<T>;
+using vv_t = std::vector<std::vector<T>>;
 
 template <typename T, typename U>
 using m_t = std::map<T, U>;
@@ -55,6 +52,23 @@ int main()
     std::ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
+
+    type_t n, x{0}, y{0};
+    cin >> n;
+
+    v_t<type_t> v(n);
+    for (type_t &i : v)
+        cin >> i;
+    std::sort(v.begin(), v.end());
+
+    for (type_t i{0}, j{n - 1}; i <= j; ++i, --j)
+    {
+        if (i != j)
+            x += v[i];
+        y += v[j];
+    }
+
+    cout << x * x + y * y << endl;
 
     return 0;
 }
