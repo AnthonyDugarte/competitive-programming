@@ -13,7 +13,7 @@ using v_t = std::vector<T>;
 template <typename T>
 using vv_t = v_t<v_t<T>>;
 template <typename T>
-using vvv_t = vv_t<T>;
+using vvv_t = v_t<vv_t<T>>;
 
 template <typename T, typename U>
 using m_t = std::map<T, U>;
