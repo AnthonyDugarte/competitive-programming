@@ -50,6 +50,19 @@ T max_val() { return std::numeric_limits<T>::max(); }
 
 type_t gcd(type_t a, type_t b) { return b == 0 ? a : gcd(b, a % b); }
 
+type_t cstPow(type_t n, type_t e)
+{
+    type_t res{1};
+    while (e > 0)
+    {
+        if (e & 1)
+            res *= n;
+        e >>= 1;
+        n *= n;
+    }
+    return res;
+}
+
 int main()
 {
     std::ios_base::sync_with_stdio(false);
